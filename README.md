@@ -29,6 +29,12 @@ TBD: Update versions (VB to match vagrant's base box, if possible)
 initialize Vagrant: `vagrant up; vagrant reload`
 7. Re-load vagrant to be sure everything is up to date: `vagrant
 reload`
+8. (Optional, highly recommended) Instal the Puppet IDE Geppetto
+
+Geppetto: In Geppetto - Options - Puppet - Stylistic Problems change
+all "Ignore" to "Warning".
+Geppetto is not perfect: sometimes strange syntax highlighting, rarely
+strange behavior.
 
 Note: The precise64 box comes pre-installed with VirtualBox guest additions
 4.2.0 => euther use VB 4.2.0 or the vagrant-vbguest plugin to
@@ -67,7 +73,7 @@ Time plan (1h):
 Tasks
 -----
 
-### 1. Get up static site on Apache
+### 1. Get a static site up on Apache
 
 Goals: Install a package, copy files, start a service, express dependencies.
 

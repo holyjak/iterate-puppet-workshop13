@@ -56,11 +56,11 @@ Vagrant::Config.run do |config|
   #
   # :options: , , "--fileserverconfig=/vagrant/fileserver.conf"
   config.vm.provision :puppet,
-  :options => ["--verbose", "--debug", "--templatedir=/vagrant/templates" ],
-  :facter => { "fqdn" => "vagrant.vagrantup.com" } do |puppet|
-	    puppet.manifests_path = "manifests"
-	    puppet.manifest_file = "my_webnode.pp"
-	    puppet.module_path = "modules"
+  :options => ["--verbose", "--debug" ],
+  :facter => { "fqdn" => "puppet-workshop.example.com" } do |puppet|
+	    puppet.manifests_path = "puppet/manifests"
+	    puppet.manifest_file = "site.pp"
+	    puppet.module_path = "puppet/modules"
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
