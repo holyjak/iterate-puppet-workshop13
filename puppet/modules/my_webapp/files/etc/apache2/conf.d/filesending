@@ -1,0 +1,6 @@
+# Bug in VirtualBox causes that memory maped files are not updated when they change in a shared folder
+# (http response has correct modified timestamp, size, ETag, but the file sent is the old one with bytes lost/added)
+# => disable these functions
+# See http://frankooh.wordpress.com/2011/01/21/vboxsf-and-small-files/ and https://www.virtualbox.org/ticket/819
+EnableSendfile Off
+EnableMMAP Off
