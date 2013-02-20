@@ -13,6 +13,7 @@ Intro
 *TODO*
 
 1. (3m) Intro: What, why, and how are we going to learn
+   * Learning based on your questions => ask!
 2. (5m) What is Puppet?
     * provisioner (=?)
     * p. vs. shell scripts (cross-platform, modules, master-slave,
@@ -21,6 +22,12 @@ Intro
     * few words about syntax (ruby-like, ...)
 3. (40m) Workshop
 4. (5m) Summary, feedback, questions
+<!--
+Puppet:
+- Describe what "resources" to create/remove etc. (files, packages,
+  users, ..)
+- Done in a manifest - a .pp text file with Ruby-based puppet code
+-->
 
 !
 
@@ -53,10 +60,17 @@ A simple example of a resource declaration:
 What is this?
 
     <resource_type> { <resource_name>:
-      property1 => value1,
+      ensure => present,
       property2 => value2,
     }
 
+<!-- COMMENTS:
+This is a basic building block of Puppet code. Notes:
+- ensure on most resources, different values: file, directory,
+  symlink, installed, ...
+- the name is usually meaningful: the file path to create or package
+  to install
+-->
 Noticed anything strange? (`,`)
 
 !
@@ -70,6 +84,10 @@ In `puppet/manifests/site.pp`, install the packages `vim` and
 
 Protip: Use an array (`[x, y, ...]`) to declare multiple same resources at once.
 (Arrays are used/allowed at multiple places.)
+<!--
+LEARNING: First experience with Puppet code, how to apply it, the
+resource type reference.
+-->
 
 !
 

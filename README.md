@@ -12,28 +12,27 @@ Hold on Iterate Conference winter edition 2013.
 Required participant preparation prior to the workshop
 ------------------------------------------------------
 
-TBD (git checkout this, install and try vagrant + VB, ...)
-TBD: Update versions (VB to match vagrant's base box, if possible)
-
 1. Install Vagrant: http://downloads.vagrantup.com/tags/v1.0.6
 2. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
 3. Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
 4. Install VirtualBox, e,g, 4.2.0: http://download.virtualbox.org/virtualbox/4.2.0/
-   (For the presenter: Make sure the VB version is the same as VB Guest Additions installed on the base box.)
 5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
 6. Enter the repository (`cd iterate-puppet-workshop13`) and
-initialize Vagrant: `vagrant up; vagrant reload`
-7. Re-load vagrant to be sure everything is up to date: `vagrant
+initialize Vagrant: `vagrant up`
+7. Re-load vagrant to be sure everything is really up to date: `vagrant
 reload`
 8. Get an editor with Puppet support - Emacs with the
 [puppet mode](https://github.com/puppetlabs/puppet-syntax-emacs/blob/master/puppet-mode.el),
 Vim with
 [puppet.vim](http://downloads.puppetlabs.com/puppet/puppet.vim) or any
-other [puppet-friendly editor](http://projects.puppetlabs.com/projects/1/wiki/Editor_Tips).
+other
+[puppet-friendly editor](http://projects.puppetlabs.com/projects/1/wiki/Editor_Tips)
+or at least one with Ruby syntax highlighting.
 
 Note: The precise64 box comes pre-installed with VirtualBox guest additions
-4.2.0 => euther use VB 4.2.0 or the vagrant-vbguest plugin to
-automatically upgrade them (requires `vagrant reload`after up).
+4.2.0 => either use VB 4.2.0 or the vagrant-vbguest plugin to
+automatically upgrade them (requires `vagrant reload` after `up` to
+reload the updated kernel).
 
 Note: The latest version of Puppet is 3.1 but we will be using 2.7.x
 since that is what comes pre-installed with Vagrant. For our purpose,
@@ -68,14 +67,15 @@ Plan (1h)
 Tasks
 -----
 
-See the included presentation/.
+The tasks will be presented during the workshop.
 
 Next learning steps
 -------------------
 
-TODO (follow [1]?)
-- more language, features, testing, workflow, pitfalls, best practices
-  (modules), forge, puppet stdlib, functions, ...
+Learn more of the puppet language, features, testing, workflow, pitfalls, best practices
+(modules), forge, puppet stdlib, functions, ... .
+
+Start by reading [PuppetIntro][PuppetIntro].
 
 Resources
 ---------
@@ -85,10 +85,15 @@ Resources
 Links
 -----
 
-1. J. Holy: [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users](http://theholyjava.wordpress.com/2012/08/13/minimalistic-practical-introduction-to-puppet-for-vagrant-users/)
-*
-[Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php) (12/2012) - blueprint/base for creating good, readable modules
-2. [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
-3.
+1. J. Holy:
+[Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
+2. 
+[Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
+3. 
 [Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
-(described in the [README](https://github.com/iterate/codecamp2012/blob/puppet/README.md).)
+(described in the
+[README](https://github.com/iterate/codecamp2012/blob/puppet/README.md).)
+4. [Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php) (12/2012) - blueprint/base for creating good, readable modules
+
+[PuppetIntro]:
+http://theholyjava.wordpress.com/2012/08/13/minimalistic-practical-introduction-to-puppet-for-vagrant-users/ "Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users"
