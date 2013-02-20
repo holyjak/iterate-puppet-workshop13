@@ -7,4 +7,4 @@ warning("Setting up $fqdn ...")
 
 ## TODO Add your resources etc. here
 
-package { 'nano'': ensure => latest }
+package { 'nano': ensure => latest }

@@ -26,6 +26,13 @@ Puppet:
 - Describe what "resources" to create/remove etc. (files, packages,
   users, ..)
 - Done in a manifest - a .pp text file with Ruby-based puppet code
+Vagrant x Puppet:
+ Just for simplicity, you can run puppet manually; notice the vagrant
+ log line:
+ [default] Running Puppet with /tmp/vagrant-puppet/ ...
+ => Vagrant does copy manifests, modules etc. there:
+ /tmp/vagrant-puppet$ sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
+ 
 -->
 
 !
@@ -226,6 +233,8 @@ A parametrized class:
 
 Congratulations, we are done!
 ----------------------------
+
+What have we learned?
 
 !
 
