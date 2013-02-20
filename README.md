@@ -12,6 +12,9 @@ Hold on Iterate Conference winter edition 2013.
 Required participant preparation prior to the workshop
 ------------------------------------------------------
 
+Notice: Downloading and installing the software and virtual box image
+might take over an hour so do it early.
+
 1. Install Vagrant: http://downloads.vagrantup.com/tags/v1.0.6
 2. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
 3. Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
@@ -28,6 +31,12 @@ Vim with
 other
 [puppet-friendly editor](http://projects.puppetlabs.com/projects/1/wiki/Editor_Tips)
 or at least one with Ruby syntax highlighting.
+9. Open the following pages in your browser:
+   * Puppet Type Reference:
+   [http://docs.puppetlabs.com/references/2.7.latest/type.html](http://docs.puppetlabs.com/references/2.7.latest/type.html)
+   * Defining a Class:
+   [http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
+   * Relationship metaparameters: [http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
 
 Note: The precise64 box comes pre-installed with VirtualBox guest additions
 4.2.0 => either use VB 4.2.0 or the vagrant-vbguest plugin to
@@ -87,6 +96,9 @@ Links
 
 1. J. Holy:
 [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
+    * Related:
+[Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php) (12/2012) - blueprint/base for creating good, readable modules
+
 2. 
 [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
 3. 

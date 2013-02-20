@@ -36,6 +36,9 @@
     bottom:0;
     opacity:0.01;
    }
+   code {
+       color: rgb(235, 174, 108);
+   }
  /* End styling */
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
@@ -103,6 +106,7 @@ $(document).keydown(function(e){
       return false;
     }
     if (e.keyCode == 32) { // space
+        // Seems to work only in FF, not Chrome
         Present.reload();
         return false;
     }

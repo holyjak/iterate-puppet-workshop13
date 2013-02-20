@@ -10,14 +10,13 @@ Let's get going!
 Intro
 =====
 
-*TODO*
-
 1. (3m) Intro: What, why, and how are we going to learn
    * Learning based on your questions => ask!
+   * Why Vagrant, V. x normal puppet agent
 2. (5m) What is Puppet?
-    * provisioner (=?)
+    * provisioner (=?) => many nodes
     * p. vs. shell scripts (cross-platform, modules, master-slave,
-      handles unimportant details itself, DYI, ...)
+      handles unimportant details itself, DRY, ...)
     * declarative, not imperative (=> order)
     * few words about syntax (ruby-like, ...)
 3. (40m) Workshop
@@ -36,7 +35,7 @@ Tasks
 
 Goal: Get a static site up on Apache.
 
-Learnings the basics:
+Learning the basics:
 
 * install a package
 * copy files
@@ -49,7 +48,7 @@ Advanced stuff:
 
 !
 
-#### Topic 1. Installing packages
+### Topic 1. Installing packages
 
 A simple example of a resource declaration:
 
@@ -75,23 +74,26 @@ Noticed anything strange? (`,`)
 
 !
 
-#### Task 1
+#### Task 1.1
 
 In `puppet/manifests/site.pp`, install the packages `vim` and
-`apache2`. Run `vagrant provision` to apply the changes. Refer to [R1].
+`apache2`.
 
-[R1]: http://docs.puppetlabs.com/references/2.7.latest/type.html "Puppet Type Reference"
+Run `vagrant provision` to apply the changes. Refer to [R1]:
 
-Protip: Use an array (`[x, y, ...]`) to declare multiple same resources at once.
+http://docs.puppetlabs.com/references/2.7.latest/type.html
+
+Protip: Use an array (<code>[x, y, ...]</code>) to declare multiple same resources at once.
 (Arrays are used/allowed at multiple places.)
 <!--
 LEARNING: First experience with Puppet code, how to apply it, the
 resource type reference.
+TODO: vagrant provision vs. running puppet agent manually
 -->
 
 !
 
-#### Topic 2. Running services and handling dependencies
+### Topic 2. Running services and handling dependencies
 
 **Task 2.1**: Make `apache2` start using the `service` resource (->
 [R1]).
@@ -108,48 +110,54 @@ Tips:
 Puppet is declarative, not imperative => no defined order
 of action execution => express dependencies explicitely:
 
-    package { 'ring: ensure => installed, }
+    package { 'ring': ensure => installed, }
     file { '/frodo': .., require => [Package['ring']], }
 
-**Task 2.2**: Make the `apache2` service depend on the `apache2` package.
+**Task 2.2**: Make the `apache2` *service* depend on the `apache2` *package*.
 
 Note: Refer to resources via `ResourceType['name']` (notice
 the initial capital letter).
 
 !
 
-#### Topic X. Using classes for order and reuse
+### Topic 3. Using classes for structure and reuse
 
 Classes encapsulate independent and reusable pieces of configuration.
-They also make more reusable via parametrization.
+They also make it more reusable via parametrization.
 
 Class example:
 
     class my_webapp {
-      ...
+      ... # install packages etc.
     }
     
     class { 'my_webapp': }
     # In this case, this would also suffice:
     # include my_webapp
 
+<!--
+Here we (1) define and (2) apply a class
+-->
 See
 [Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class).
 
 !
 
-**Task 1**: Wrap the resources defined so far in a class
+**Task 3.1**: Wrap the resources defined so far in a class
 
 The class has already been defined for you in
 `puppet/modules/my_webapp/site.pp` (we will talk about modules later)
-so just move the resources into it.
+=>
+
+1. move the resources into it
+2. apply the class in the original `site.pp`
 
 !
 
-#### 3. Copying files and directories
+### Topic 4. Copying files and directories
 
-**Task 3.1**: Copy the www folder with proper permissions to
-`/var/www/my_web`
+**Task 4.1**: Copy the *www* folder into `/var/www/my_web` and let the user
+  *www-data* own it.
 
 * use the file resource to create the parent folders
 * another one to copy the directory (recursively)
@@ -161,20 +169,25 @@ directories without any `require`? Autorequire!
 
 !
 
-**Task 3.2**: Copy also the Apache site config that is in the module files
-directory, under `etc/apache2`.
+**Task 4.2**: Copy also the Apache site config that is
+ under `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`.
 
 !
 
-##### Topic 4. Dependencies II: reload after configuration change
+#### Topic 5. Dependencies II: reload after configuration change
 
-**Task 4.1**: Tell Puppet to restart apache when its configuration changes.
+Apache doesn't only require its configuration, it should also be
+restarted ("reloaded") whenever it changes.
 
-Tip: See the `subscribe` [relationship metaparameter](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters).
+**Task 5.1**: Tell Puppet to restart Apache when its configuration changes.
+
+Tip: See the
+[relationship metaparameter](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+`subscribe`.
 
 !
 
-#### Topic 6. The final round: modules
+### Topic 6. The final round: modules
 
 **Task 1:** Use the [puppetlabs apache module] instead of doing everything
 manually
@@ -189,9 +202,8 @@ manually
 
 See also [apache:vhost source](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/vhost.pp).
 
-!
-
-##### Topic X. Parametrized classes (to be dropped????)
+<!--
+### Topic 7. Parametrized classes (to be dropped????)
 
 *TODO: Do we have time for this? Likely drop it.*
 
@@ -209,29 +221,36 @@ A parametrized class:
     }
     
     class { 'my_webapp': $required_param => 123, }
+-->
+!
+
+Congratulations, we are done!
+----------------------------
 
 !
 
 Next learning steps
 -------------------
 
-Read [1], read the types reference and puppet language guide.
+Read my Minimalistic Practical Introduction to Puppet (link in the README.md) and the
+types reference and puppet language guide at docs.puppetlabs.com.
 
-More to learn:
+Some things to learn:
 
-- conditionlals, facts
-- more language, features, testing, workflow, pitfalls, best practices
-  (modules), forge, puppet stdlib, functions, ...
+- conditionals, facts
+- more language and features,
+- testing, workflow, pitfalls, best practices
+- reuse: modules, forge, puppet stdlib, functions, ...
 
 !
 
-Links
------
+Feed-back! Q&A
+=============
 
-1. J. Holy: [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users](http://theholyjava.wordpress.com/2012/08/13/minimalistic-practical-introduction-to-puppet-for-vagrant-users/)
-*
-[Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php) (12/2012) - blueprint/base for creating good, readable modules
-2. [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
-3.
-[Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
-(described in the [README](https://github.com/iterate/codecamp2012/blob/puppet/README.md).)
+* Workshop:
+  * Satisfied?
+  * What to improve?
+* Questions?
+* Other feedback?
+
+[R1]: http://docs.puppetlabs.com/references/2.7.latest/type.html "Puppet Type Reference"
