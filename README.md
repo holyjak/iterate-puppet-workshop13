@@ -1,6 +1,12 @@
 Iterate Puppet Miniworkshop 2/2013
 ==================================
 
+*TODO*
+
+* install puppet lint in the VM, show how to run, link to puppet
+guidelines
+* link to puppet module structure & how to ref. to files, templates
+
 Goal
 ----
 
@@ -122,9 +128,6 @@ Links
 
 1. J. Holy:
 [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
-    * Related:
-[Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php) (12/2012) - blueprint/base for creating good, readable modules
-
 2. 
 [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
 3. 

@@ -35,10 +35,14 @@
     top:0;
     bottom:0;
     opacity:0.01;
+    z-index:-1;
    }
    code {
        color: rgb(235, 174, 108);
-   }
+  }
+  a {
+    color: lime;
+  }
  /* End styling */
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
@@ -72,7 +76,7 @@ Present.showSlide = function(slide) {
 };
 Present.nextSlide = function() {
   if (Present.currentSlide < Present.slides.length-1) {
-    Present.showSlide(Present.currentSlide+1);  
+    Present.showSlide(Present.currentSlide+1);
   }
 };
 Present.prevSlide = function() {
@@ -97,11 +101,11 @@ Present.reload = function() {
 Present.reload();
 
 $(document).keydown(function(e){
-    if (e.keyCode == 37) { 
+    if (e.keyCode == 37) {
        Present.prevSlide();
        return false;
     }
-    if (e.keyCode == 39) { 
+    if (e.keyCode == 39) {
       Present.nextSlide();
       return false;
     }

@@ -1,11 +1,54 @@
 Iterate Puppet Miniworkshop 2/2013
 ==================================
 
+<!--
+!!! USE CHROME FOR PRESENTATION, FF SUCSK !!!
+-->
 Let's get going!
+
+Tip:
+
+    cd presentation
+    python -m SimpleHTTPServer
+    browse to http://localhost:8000
+
+<!--
+# TIMING #
+60 min to go; done at min.:
+- Intro: 	57
+
+- Topic 1:	53	(packages)
+- Task 1.1:	49
+
+- Topic 2:	-	(service, deps)
+- Task 2.1:	42
+- Task 2.2:	38
+
+- Topic 3:	36	(class)
+- Task 3.1:	30
+
+- Topic 4:	-	(file/dir copy)
+- Task 4.1:	14 !!! lot of time lost here
+- Task 4.2:	- (simple copy&paste)
+
+- Topic 5:	10 (subscribe)
+- Task 5.1:	5
+
+- Topic 6:	skipped (module))
+- Task 6.1:	skipped
+
+- Next steps:	 -
+- Feedback, Q&A: -
+
+# TODO #
+* Leave #6 out, just a read-yourself example
+* Introduce rather f.ex. templates
+* !!! Mention things not taught (templates, conditionals, facts, ...)
+-->
 
 !
 
-Intro
+Intro <!-- Done when 57 min left -->
 =====
 
 1. (3m) Intro: What, why, and how are we going to learn
@@ -30,7 +73,6 @@ Vagrant x Puppet:
  [default] Running Puppet with /tmp/vagrant-puppet/ ...
  => Vagrant does copy manifests, modules etc. there:
 /tmp/vagrant-puppet$ sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
- 
 -->
 
 !
@@ -53,13 +95,13 @@ Advanced stuff:
 
 !
 
-### Intro
+### Look around
 
 Run `find .` in the workshop directory to see what we have got here.
 
 !
 
-### Topic 1. Installing packages
+### Topic 1. Installing packages <!-- Done when 53 min left -->
 
 A simple example of a resource declaration:
 
@@ -85,16 +127,16 @@ Noticed anything strange? (`,`)
 
 !
 
-#### Task 1.1
+#### Task 1.1 <!-- Done when 49 min left -->
 
-In `puppet/manifests/site.pp`, install the packages `vim` and
-`apache2`.
+(1) In `puppet/manifests/site.pp`, install the packages `vim` and
+`apache2`. See
 
-Run `vagrant provision` to apply the changes. Refer to [R1]:
+R1: *http://docs.puppetlabs.com/references/2.7.latest/type.html*
 
-http://docs.puppetlabs.com/references/2.7.latest/type.html
+(2) Run `vagrant provision` to apply the changes.
 
-Protip: Use an array (<code>[x, y, ...]</code>) to declare multiple same resources at once.
+Tip: Use an array of names (<code>[x, y, ...]</code>) to declare multiple same resources at once.
 (Arrays are used/allowed at multiple places.)
 <!--
 LEARNING: First experience with Puppet code, how to apply it, the
@@ -120,13 +162,16 @@ Or:
 
 ### Topic 2. Running services and handling dependencies
 
-#### Task 2.1: Make `apache2` start using the `service` resource (ref [R1]).
+#### Task 2.1: Make `apache2` start using the `service` resource (ref [R1]) <!-- Done when 42 min left -->
 
 Tips:
 
-* The name maps to a file in `/etc/init.d/` (`apache2`, in this case)
+* Name it `apache2` -  maps to a script in `/etc/init.d/`
 * You only need `ensure` now
-* Run `sudo service apache2 stop` in Vagrant to stop it to see it gets
+
+Testing:
+
+* Run `vagrant ssh -c "sudo service apache2 stop"` to stop it to see it gets
 started
 * Notice log *../Service[apache2]/.. to running*
 
@@ -148,7 +193,7 @@ of action execution => express dependencies explicitely:
     package { 'ring': ensure => installed, }
     file { '/frodo': .., require => [Package['ring']], }
 
-#### Task 2.2: Make the `apache2` *service* depend on (require) the `apache2` *package*.
+#### Task 2.2: Make the `apache2` *service* require the `apache2` *package* <!-- Done when 38 min left -->
 
 Note: Refer to resources via `ResourceType['name']` (notice
 the initial capital letter).
@@ -172,18 +217,18 @@ or
 
 !
 
-### Topic 3. Using classes for structure and reuse
+### Topic 3. Using classes for structure and reuse <!-- Done when 36 min left -->
 
 Classes encapsulate independent and reusable pieces of configuration.
 They also make it more reusable via parametrization.
 
 Class example:
 
-    class my_webapp {
+    class my_webapp {                       # declare
       ... # install packages etc.
     }
     
-    class { 'my_webapp': }
+    class { 'my_webapp': }                  # apply
     # In this case, this would also suffice:
     # include my_webapp
 
@@ -198,8 +243,10 @@ See
 #### Task 3.1: Wrap the resources defined so far in a class
 
 The class has already been defined for you in
-`puppet/modules/my_webapp/manifests/init.pp` (we will talk about modules later)
-=>
+
+    puppet/modules/my_webapp/manifests/init.pp
+
+(we will talk about modules later) =>
 
 1. move the resources into it
 2. apply the class in the original `site.pp`
@@ -224,14 +271,20 @@ puppet/manifests/site.pp:
 
 ### Topic 4. Copying files and directories
 
-#### Task 4.1: Copy the *www* folder into `/srv/my/www/my_web` and let the user *www-data* own it.
+#### Task 4.1: Copy the *www* site <!-- Done when 14 min left -->
 
-In init.pp: use the `file` resource to create the parent folders,
-another one to copy recursively the directory.
+* Copy `puppet/modules/my_webapp/files/www`
+* (visible to puppet as `'puppet:///modules/my_webapp/www'`)
+* into `/srv/my/www/my_web`
+* Make user `www-data` own my_web
 
-* from `puppet/modules/my_webapp/files/www`,
-* visible to puppet as `'puppet:///modules/my_webapp/www'`
-* Use ensure, source, owner, recurse
+Add `file` resource(s) to the my_webapp class.
+
+You'll need ensure, source, owner, recurse
+<!--
+They will try to copy the dir w/o creating the parent dirs and fail -
+that is a good learning.
+-->
 
 !
 
@@ -264,11 +317,7 @@ init.pp:
 
 #### Task 4.2: Copy also the Apache site config
 
-From `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`.
-
-!
-
-#### Task 4.2 solution
+From `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`:
 
     file { '/etc/apache2':
       ensure => directory,
@@ -279,14 +328,14 @@ From `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`.
 
 !
 
-#### Topic 5. Dependencies II: reload after configuration change
+#### Topic 5. Dependencies II: reload after configuration change <!-- Done when 10 min left -->
 
 Apache doesn't only require its configuration, it should also be
 restarted ("reloaded") whenever it changes.
 
-#### Task 5.1: Tell Puppet to restart Apache when its configuration changes.
+#### Task 5.1: Tell Puppet to restart Apache when its configuration changes. <!-- Done when 5 min left -->
 
-Tip: Apply the
+You'll need to apply the
 [relationship metaparameter](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
 `subscribe` to the service.
 
@@ -314,7 +363,7 @@ provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Servic
 
 Run `vagrant ssh` and then:
 
-    puppet --configprint modulepath
+    puppet --configprint modulepath # optional
     mkdir -p /home/vagrant/.puppet/modules
     puppet module install puppetlabs-apache
     mv /home/vagrant/.puppet/modules/* /vagrant/puppet/modules/
@@ -323,7 +372,8 @@ Use the apache module: include the main class (`apache`) and use the
 `apache::vhost` resource that it defines.
 
 * set its `docroot` to `/srv/my/www`
-* use localhost as the resource name
+* set `port` to `80`
+* use *localhost* as the resource name
 
 [puppetlabs apache module]: https://forge.puppetlabs.com/puppetlabs/apache
 
@@ -354,9 +404,9 @@ For vagrant, move the modules to /vagrant/puppet/modules/
       docroot => '/srv/my/www',
     }
   
-    file { .. }
+    file { ... }
 
-No apache2 package or service.
+(No apache2 package or service anymore.)
 
 <!-- ==================================================== LEFT OUT
 ### Topic 7. Parametrized classes (to be dropped????)
@@ -395,14 +445,15 @@ types reference and puppet language guide at docs.puppetlabs.com.
 
 Some things to learn:
 
-- conditionals, facts
-- more language and features,
+- conditionals, facts, templates
+- more language and features
 - testing, workflow, pitfalls, best practices
 - reuse: modules, forge, puppet stdlib, functions, ...
+- master/slave setup
 
 !
 
-Feed-back! Q&A
+Feed-me-back! Q&A
 =============
 
 * Workshop:
