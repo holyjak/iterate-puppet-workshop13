@@ -55,6 +55,12 @@ Advanced stuff:
 
 !
 
+### Intro
+
+Run `find .` in the workshop directory to see what we have got here.
+
+!
+
 ### Topic 1. Installing packages
 
 A simple example of a resource declaration:
@@ -96,23 +102,47 @@ Protip: Use an array (<code>[x, y, ...]</code>) to declare multiple same resourc
 LEARNING: First experience with Puppet code, how to apply it, the
 resource type reference.
 TODO: vagrant provision vs. running puppet agent manually
+Time: 45s catalog run
 -->
+
+!
+
+#### Task 1.1 solution
+
+Either:
+
+    package { 'vim': ensure => latest, }
+    package { 'apache2': ensure => latest, }
+
+Or:
+
+    package { ['vim', 'apache2']: ensure => latest, }
 
 !
 
 ### Topic 2. Running services and handling dependencies
 
-**Task 2.1**: Make `apache2` start using the `service` resource (->
-[R1]).
+#### Task 2.1: Make `apache2` start using the `service` resource (ref [R1]).
 
 Tips:
 
 * The name maps to a file in `/etc/init.d/` (`apache2`, in this case)
 * You only need `ensure` now
+* Run `sudo service apache2 stop` in Vagrant to stop it to see it gets
+started
+* Notice log *../Service[apache2]/.. to running*
 
 !
 
-##### Intermezzo
+#### Task 2.1 solution
+
+site.pp:
+
+    service { 'apache2': ensure => running, }
+
+!
+
+#### Intermezzo
 
 Puppet is declarative, not imperative => no defined order
 of action execution => express dependencies explicitely:
@@ -120,10 +150,27 @@ of action execution => express dependencies explicitely:
     package { 'ring': ensure => installed, }
     file { '/frodo': .., require => [Package['ring']], }
 
-**Task 2.2**: Make the `apache2` *service* depend on the `apache2` *package*.
+#### Task 2.2: Make the `apache2` *service* depend on (require) the `apache2` *package*.
 
 Note: Refer to resources via `ResourceType['name']` (notice
 the initial capital letter).
+
+!
+
+#### Task 2.2 solution
+
+    service { 'apache2':
+      ensure => running,
+      require => Package['apache2'],
+    }
+
+or
+
+    service { 'apache2':
+      ensure => running,
+      require => [ Package['apache2'] ],
+      # ^ could require multiple resources
+    }
 
 !
 
@@ -150,10 +197,10 @@ See
 
 !
 
-**Task 3.1**: Wrap the resources defined so far in a class
+#### Task 3.1: Wrap the resources defined so far in a class
 
 The class has already been defined for you in
-`puppet/modules/my_webapp/site.pp` (we will talk about modules later)
+`puppet/modules/my_webapp/manifests/init.pp` (we will talk about modules later)
 =>
 
 1. move the resources into it
@@ -161,23 +208,76 @@ The class has already been defined for you in
 
 !
 
-### Topic 4. Copying files and directories
+#### Task 3.1 solution
 
-**Task 4.1**: Copy the *www* folder into `/var/www/my_web` and let the user
-  *www-data* own it.
+puppet/modules/my_webapp/manifests/init.pp:
 
-* use the file resource to create the parent folders
-* another one to copy the directory (recursively)
-* the directory is in `puppet/modules/my_webapp/files/www`
-* which is visible to puppet as `puppet://modules/my_webapp/www`
+    class my_webapp {
+      package { ['vim', 'apache2']: ensure => latest, }
+      service { 'apache2': ensure => running,
+        require => Package['apache2'], }
+    }
 
-**Intermezzo**: How can I be sure the files are created after their
-directories without any `require`? Autorequire!
+puppet/manifests/site.pp:
+
+    class { 'my_webapp': }
 
 !
 
-**Task 4.2**: Copy also the Apache site config that is
- under `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`.
+### Topic 4. Copying files and directories
+
+#### Task 4.1: Copy the *www* folder into `/srv/my/www/my_web` and let the user *www-data* own it.
+
+In init.pp: use the `file` resource to create the parent folders,
+another one to copy recursively the directory.
+
+* from `puppet/modules/my_webapp/files/www`,
+* visible to puppet as `'puppet:///modules/my_webapp/www'`
+* Use ensure, source, owner, recurse
+
+!
+
+#### Intermezzo:
+
+How can I be sure the files are created after their directories without any `require`? Autorequire!
+
+!
+
+#### Task 4.1 solution
+
+init.pp:
+
+    class my_webapp {
+      ...
+      file { ['/srv/my', '/srv/my/www']:
+        ensure => directory,
+      }
+        
+      file { '/srv/my/www/my_web':
+        ensure => directory,
+        source => 'puppet:///modules/my_webapp/www',
+        recurse => true,
+        owner => 'www-data',
+      }
+    }
+
+
+!
+
+#### Task 4.2: Copy also the Apache site config
+
+From `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`.
+
+!
+
+#### Task 4.2 solution
+
+    file { '/etc/apache2':
+      ensure => directory,
+      source => 'puppet:///modules/my_webapp/etc/apache2',
+      recurse => true,
+    }
+
 
 !
 
@@ -186,18 +286,36 @@ directories without any `require`? Autorequire!
 Apache doesn't only require its configuration, it should also be
 restarted ("reloaded") whenever it changes.
 
-**Task 5.1**: Tell Puppet to restart Apache when its configuration changes.
+#### Task 5.1: Tell Puppet to restart Apache when its configuration changes.
 
-Tip: See the
+Tip: Apply the
 [relationship metaparameter](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
-`subscribe`.
+`subscribe` to the service.
+
+Tip: To simulate change, run `echo '#' >>
+puppet/modules/my_webapp/files/etc/apache2/envvars` prior to `vagrant
+provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Service[apache2]*".
+
+!
+
+#### Task 5.1 solution
+
+      service { 'apache2':
+        ensure => running,
+        require => Package['apache2'],
+        subscribe => File['/etc/apache2'],
+      }
+
+(There are other/better ways, e.g. subscribe to a special config class.)
 
 !
 
 ### Topic 6. The final round: modules
 
-**Task 1:** Use the [puppetlabs apache module] instead of doing everything
-manually
+#### Task 6.1: Use the [puppetlabs apache module] instead of doing everything manually
+
+1. Download the [puppetlabs apache module]'s .tar.gz and unpack it
+and make the root dir become `puppet/modules/apache`
 
 - use its `docroot` parameter to specify where the web content is
 

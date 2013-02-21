@@ -36,7 +36,9 @@ or at least one with Ruby syntax highlighting.
    [http://docs.puppetlabs.com/references/2.7.latest/type.html](http://docs.puppetlabs.com/references/2.7.latest/type.html)
    * Defining a Class:
    [http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
-   * Relationship metaparameters: [http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+   * Relationship metaparameters:
+   [http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+10. Download https://forge.puppetlabs.com/puppetlabs/apache
 
 Note: The precise64 box comes pre-installed with VirtualBox guest additions
 4.2.0 => either use VB 4.2.0 or the vagrant-vbguest plugin to

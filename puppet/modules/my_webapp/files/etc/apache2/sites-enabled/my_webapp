@@ -2,7 +2,7 @@
 	ServerAdmin webmaster@localhost
 	ServerName	    localhost
 
-	DocumentRoot /var/www/my_web
+	DocumentRoot /srv/my/www/my_web
 	<Directory />
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
