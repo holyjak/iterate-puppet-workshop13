@@ -314,20 +314,53 @@ provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Servic
 
 #### Task 6.1: Use the [puppetlabs apache module] instead of doing everything manually
 
-1. Download the [puppetlabs apache module]'s .tar.gz and unpack it
-and make the root dir become `puppet/modules/apache`
+Run `vagrant ssh` and then:
 
-- use its `docroot` parameter to specify where the web content is
+    puppet --configprint modulepath
+    mkdir -p /home/vagrant/.puppet/modules
+    puppet module install puppetlabs-apache
+    mv /home/vagrant/.puppet/modules/* /vagrant/puppet/modules/
 
-*TODO Will need to add the hostname to /etc/hosts?*
+Use the apache module: include the main class (`apache`) and use the
+`apache::vhost` resource that it defines.
 
-*TODO How to best install the module? Download & unpack?*
+* set its `docroot` to `/srv/my/www`
+* use localhost as the resource name
 
 [puppetlabs apache module]: https://forge.puppetlabs.com/puppetlabs/apache
 
-See also [apache:vhost source](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/vhost.pp).
-
 <!--
+TODO
+- normally modules would be installed via puppet module
+
+Ex:
+vagrant ssh
+puppet --configprint modulepath
+mkdir -p /home/vagrant/.puppet/modules
+puppet module install puppetlabs-apache
+
+For vagrant, move the modules to /vagrant/puppet/modules/
+-->
+!
+
+#### Task 6.1 solution
+
+    package { ['vim']: ensure => latest, } # no apache
+  
+    include 'apache'
+  
+    apache::vhost { 'localhost':
+      #priority        => '25',
+      #vhost_name      => '*',
+      port            => '80',
+      docroot => '/srv/my/www',
+    }
+  
+    file { .. }
+
+No apache2 package or service.
+
+<!-- ==================================================== LEFT OUT
 ### Topic 7. Parametrized classes (to be dropped????)
 
 *TODO: Do we have time for this? Likely drop it.*
