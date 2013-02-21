@@ -17,8 +17,8 @@ might take over an hour so do it early.
 
 1. Install Vagrant: http://downloads.vagrantup.com/tags/v1.0.6
 2. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
-3. Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
-4. Install VirtualBox, e,g, 4.2.0: http://download.virtualbox.org/virtualbox/4.2.0/
+3. (Optional - `vagrant up` shall do it) Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
+4. Install VirtualBox, e.g. 4.2.0: http://download.virtualbox.org/virtualbox/4.2.0/
 5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
 6. Enter the repository (`cd iterate-puppet-workshop13`) and
 initialize Vagrant: `vagrant up`
@@ -73,6 +73,31 @@ Plan (1h)
     * few words about syntax (ruby-like, ...)
 3. (40m) Workshop
 4. (5m) Summary, feedback, questions
+
+Why Vagrant?
+------------
+
+We will use a virtual machine (VM) managed by Vagrant for the workshop
+because it is easier to experiment with.
+
+Start the VM with `vagrant up`, apply the puppet manifest with
+`vagrant provision`, log into the VM with `vagrant ssh`, destroy and
+re-create the VM to get clean state: `vagrant destroy; vagrant up;
+vagrant reload`. Notice also that this directory is shared with the VM
+as `/vagrant/`.
+
+### Running Puppet manually
+
+Vagrant basically copies the puppet config files to a place in the VM
+and then invokes puppet. Notice the vagrant log line "*[default]
+Running Puppet with /tmp/vagrant-puppet/ ...*".
+
+You can do it manually as well:
+
+    vagrant ssh
+    cd /tmp/vagrant-puppet/
+    # opt.: cp -r /vagrant/puppet/manifests ./manifests; modules too
+    sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
 
 Tasks
 -----

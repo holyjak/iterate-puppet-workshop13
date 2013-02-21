@@ -1,8 +1,6 @@
 Iterate Puppet Miniworkshop 2/2013
 ==================================
 
-*TODO*: ADD 'SOLUTION SLIDES' to each task
-
 Let's get going!
 
 !
@@ -31,7 +29,7 @@ Vagrant x Puppet:
  log line:
  [default] Running Puppet with /tmp/vagrant-puppet/ ...
  => Vagrant does copy manifests, modules etc. there:
- /tmp/vagrant-puppet$ sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
+/tmp/vagrant-puppet$ sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
  
 -->
 
