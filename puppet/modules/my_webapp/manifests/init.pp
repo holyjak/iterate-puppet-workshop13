@@ -7,6 +7,6 @@
 # Actions: N/A
 #
 class my_webapp {
-  notice("Hello from my_webapp!")
+  notice('Hello from my_webapp!')
 
 }

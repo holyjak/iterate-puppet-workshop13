@@ -1,12 +1,6 @@
 Iterate Puppet Miniworkshop 2/2013
 ==================================
 
-*TODO*
-
-* install puppet lint in the VM, show how to run, link to puppet
-guidelines
-* link to puppet module structure & how to ref. to files, templates
-
 Goal
 ----
 
@@ -21,10 +15,10 @@ Required participant preparation prior to the workshop
 Notice: Downloading and installing the software and virtual box image
 might take over an hour so do it early.
 
-1. Install Vagrant: http://downloads.vagrantup.com/tags/v1.0.6
-2. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
-3. (Optional - `vagrant up` shall do it) Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
-4. Install VirtualBox, e.g. 4.2.0: http://download.virtualbox.org/virtualbox/4.2.0/
+1. Install VirtualBox, e.g. 4.2.0: http://download.virtualbox.org/virtualbox/4.2.0/
+2. Install Vagrant: http://downloads.vagrantup.com/tags/v1.0.6
+3. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
+4. (Optional - `vagrant up` shall do it) Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
 5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
 6. Enter the repository (`cd iterate-puppet-workshop13`) and
 initialize Vagrant: `vagrant up`
@@ -70,14 +64,10 @@ exec, arrays, ...
 Plan (1h)
 ---------
 
-1. (3m) Intro: What, why, and how are we going to learn
-2. (5m) What is Puppet?
-    * provisioner (=?)
-    * p. vs. shell scripts (cross-platform, modules, master-slave,
-      handles unimportant details itself, DYI, ...)
-    * declarative, not imperative (=> order)
-    * few words about syntax (ruby-like, ...)
-3. (40m) Workshop
+1. (0.5m) Intro: What, why, and how are we going to learn
+2. (3m) What is Puppet?
+    * what need does it satisfy, few words about how it works
+3. (50m) Workshop
 4. (5m) Summary, feedback, questions
 
 Why Vagrant?
@@ -126,6 +116,7 @@ Resources
 Links
 -----
 
+### Tutorials, examples etc. 
 1. J. Holy:
 [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
 2. 
@@ -134,7 +125,40 @@ Links
 [Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
 (described in the
 [README](https://github.com/iterate/codecamp2012/blob/puppet/README.md).)
-4. [Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php) (12/2012) - blueprint/base for creating good, readable modules
+4. 
+[Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php)
+(12/2012) - blueprint/base for creating good, readable modules
+5. 
+[Example42 Puppet Tutorials](http://www.example42.com/?q=Example42PuppetTutorials):
+[Puppet Essentials](http://example42.com/tutorials/build/deck/essentials/),
+[Puppet Advanced Topics](http://example42.com/tutorials/build/deck/advanced/)
+6. PuppetLabs: [Learning Puppet](http://docs.puppetlabs.com/learning/)
+7. [Puppet Cookbook](http://www.puppetcookbook.com/) (online)
+8. 
+[Verifying Puppet: Checking Syntax and Writing Automated Tests](https://puppetlabs.com/blog/verifying-puppet-checking-syntax-and-writing-automated-tests/)
+(Jan 2012)
+
+### Puppet Docs (v2.7)
+1.  [Puppet Type Reference](http://docs.puppetlabs.com/references/2.7.latest/type.html)
+2.  [Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
+3. 
+[Relationship metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+(subscribe etc.)
+4. 
+ [Module Fundamentals](http://docs.puppetlabs.com/puppet/2.7/reference/modules_fundamentals.html)
+- module layout, auto-loading of modules etc.
+5. 
+[Puppet Style Guide](http://docs.puppetlabs.com/guides/style_guide.html)
+- indent with two spaces, use single quotes wherever possible, ensure
+always first, avoid inheritance
+
+### Tools
+1. [puppet-lint](http://puppet-lint.com/) - check your
+Puppet manifests against the Puppet Style Guide; you should always use it
+2. [rpsec-puppet](http://rspec-puppet.com/) - unit testing of Puppet
+manifests (useful if they contain conditional logic, doesn't run the
+manufest but checks its compiled output for a given input)
+
 
 [PuppetIntro]:
 http://theholyjava.wordpress.com/2012/08/13/minimalistic-practical-introduction-to-puppet-for-vagrant-users/ "Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users"

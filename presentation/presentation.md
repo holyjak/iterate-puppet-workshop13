@@ -2,7 +2,7 @@ Iterate Puppet Miniworkshop 2/2013
 ==================================
 
 <!--
-!!! USE CHROME FOR PRESENTATION, FF SUCSK !!!
+!!! USE CHROME FOR PRESENTATION, FF SUCKS !!!
 -->
 Let's get going!
 
@@ -40,10 +40,6 @@ Tip:
 - Next steps:	 -
 - Feedback, Q&A: -
 
-# TODO #
-* Leave #6 out, just a read-yourself example
-* Introduce rather f.ex. templates
-* !!! Mention things not taught (templates, conditionals, facts, ...)
 -->
 
 !
@@ -51,16 +47,16 @@ Tip:
 Intro <!-- Done when 57 min left -->
 =====
 
-1. (3m) Intro: What, why, and how are we going to learn
+1. (0.5m) Intro: What, why, and how are we going to learn
    * Learning based on your questions => ask!
    * Why Vagrant, V. x normal puppet agent
-2. (5m) What is Puppet?
+2. (3m) What is Puppet?
     * provisioner (=?) => many nodes
     * p. vs. shell scripts (cross-platform, modules, master-slave,
       handles unimportant details itself, DRY, ...)
     * declarative, not imperative (=> order)
     * few words about syntax (ruby-like, ...)
-3. (40m) Workshop
+3. (50m) Workshop
 4. (5m) Summary, feedback, questions
 <!--
 Puppet:
@@ -113,7 +109,7 @@ What is this?
 
     <resource_type> { <resource_name>:
       ensure => present,
-      property2 => value2,
+      attribute2 => value2,
     }
 
 <!-- COMMENTS:
@@ -132,7 +128,7 @@ Noticed anything strange? (`,`)
 (1) In `puppet/manifests/site.pp`, install the packages `vim` and
 `apache2`. See
 
-R1: *http://docs.puppetlabs.com/references/2.7.latest/type.html*
+[R1: *http://docs.puppetlabs.com/references/2.7.latest/type.html*][R1]
 
 (2) Run `vagrant provision` to apply the changes.
 
@@ -160,6 +156,13 @@ Or:
 
 !
 
+#### Intermezzo: Syntax checking
+
+    vagrant ssh -c 'puppet-lint --with-filename \\
+        /vagrant/puppet/'
+
+!
+
 ### Topic 2. Running services and handling dependencies
 
 #### Task 2.1: Make `apache2` start using the `service` resource (ref [R1]) <!-- Done when 42 min left -->
@@ -171,8 +174,8 @@ Tips:
 
 Testing:
 
-* Run `vagrant ssh -c "sudo service apache2 stop"` to stop it to see it gets
-started
+* Run `vagrant ssh -c 'sudo service apache2 stop'` to stop it and see
+that it gets started
 * Notice log *../Service[apache2]/.. to running*
 
 !
@@ -235,8 +238,8 @@ Class example:
 <!--
 Here we (1) define and (2) apply a class
 -->
-See
-[Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class).
+Optional: see
+[Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
 
 !
 
@@ -273,18 +276,32 @@ puppet/manifests/site.pp:
 
 #### Task 4.1: Copy the *www* site <!-- Done when 14 min left -->
 
-* Copy `puppet/modules/my_webapp/files/www`
+* Copy puppet/modules/my_webapp/files/www
 * (visible to puppet as `'puppet:///modules/my_webapp/www'`)
 * into `/srv/my/www/my_web`
 * Make user `www-data` own my_web
 
-Add `file` resource(s) to the my_webapp class.
-
-You'll need ensure, source, owner, recurse
+You'll need <code>file</code> resource(s) and the attributes <code>ensure, source,
+owner, recurse</code>. Do it in the my_webapp class.
 <!--
 They will try to copy the dir w/o creating the parent dirs and fail -
 that is a good learning.
 -->
+
+!
+
+#### Side note: File path <=> puppet url
+
+    '/files/' is implied by the file resource
+                                         V
+    $WORKSHOP/puppet/modules/my_webapp/files/www
+                                |       _____/
+                                v      V
+          puppet:///modules/my_webapp/www
+          '---------------'      ^- module name
+                  ^- do lookup on MODULEPATH
+
+    (Vagrantfile: puppet.module_path = "puppet/modules")
 
 !
 
@@ -317,7 +334,7 @@ init.pp:
 
 #### Task 4.2: Copy also the Apache site config
 
-From `.../files/etc/apache2` into the corresponding places in  `/etc/apache2/`:
+From `puppet/modules/my_webapp/files/etc/apache2` into `/etc/apache2/`:
 
     file { '/etc/apache2':
       ensure => directory,
@@ -430,6 +447,18 @@ A parametrized class:
 -->
 !
 
+Left out
+--------
+- variables, variable interpolation in strings
+- templates instead of static files
+- conditionals
+- inheritance (overused?)
+- functions (fail, warning, ...)
+- facts
+- ...
+
+!
+
 Congratulations, we are done!
 ----------------------------
 
@@ -440,16 +469,13 @@ What have we learned?
 Next learning steps
 -------------------
 
-Read my Minimalistic Practical Introduction to Puppet (link in the README.md) and the
-types reference and puppet language guide at docs.puppetlabs.com.
+Read primarily
 
-Some things to learn:
+* my Minimalistic Practical Introduction to Puppet
+* the types reference
+* puppet language guide
 
-- conditionals, facts, templates
-- more language and features
-- testing, workflow, pitfalls, best practices
-- reuse: modules, forge, puppet stdlib, functions, ...
-- master/slave setup
+Links to these and other valuable resources are [in the main README](https://github.com/jakubholynet/iterate-puppet-workshop13#links).
 
 !
 
