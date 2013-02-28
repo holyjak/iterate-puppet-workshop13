@@ -97,6 +97,22 @@ Run `find .` in the workshop directory to see what we have got here.
 
 !
 
+### Applying puppet config
+
+To apply the Puppet configuration after each task:
+
+Run either
+
+    vagrant provision
+
+or
+
+    vagrant ssh
+    cd /vagrant/puppet
+    sudo puppet apply --debug --verbose --modulepath=modules manifests/site.pp
+
+!
+
 ### Topic 1. Installing packages <!-- Done when 53 min left -->
 
 A simple example of a resource declaration:
@@ -420,7 +436,7 @@ For vagrant, move the modules to /vagrant/puppet/modules/
 
     package { ['vim']: ensure => latest, } # no apache
   
-    include 'apache'
+    class { 'apache': }
   
     apache::vhost { 'localhost':
       #priority        => '25',
