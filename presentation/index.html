@@ -1,119 +1,122 @@
-<html>
-<head>
-<title>Puppet Workshop '13</title>
-<style>
-  html, body {
-  	margin:0;
-  	border:0;
-  	padding:0;
-  	font-family: helvetica;
-    color: white;
-  }
-  div.centered {
-  	margin:auto;
-  	font-size:40px;
-  	width:20em; /* So we get about 10 words per line */
-  }
-  .slideCount {
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
-  }
+<!doctype html>
+<html lang="en">
 
-  /* My styling here */
-  body {
-    background: #223;
-    background: -webkit-gradient(linear, left top, left bottom, from(#334), to(#112));
-    background: -moz-linear-gradient(top,  #334,  #112);
-    text-shadow: #000 0 -2px 0;
-  }
-  .bg {
-    background-image: url(bg.jpg);
-    position:absolute;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    opacity:0.01;
-    z-index:-1;
-   }
-   code {
-       color: rgb(235, 174, 108);
-  }
-  a {
-    color: lime;
-  }
- /* End styling */
-</style>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script type="text/javascript" src="showdown.js"></script>
-</head>
-<body>
+	<head>
+		<meta charset="utf-8">
 
-<div class="bg">&nbsp;</div>
+		<title>Puppet Workshop '13 @ reveal.js</title>
 
-<table style="width:100%;height:100%;border-collapse:collapse">
-<tr valign=center>
-<td>
-<div class='centered'>
-<em>Loading</em>
-</div>
-</td>
-</tr>
-</table>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<div class='slideCount'>Slide X of Y</div>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-</body>
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+                <!-- JH: -->
+                <script src="lib/js/zepto.min.js"></script>
+                <script src="plugin/markdown/showdown.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+                   <style type="text/css">
+                     .reveal .slides {
+                        text-align: left; //center
+                     }
+
+                     .reveal ol, .reveal ul {
+                        display: block; //inline-block;
+                     }
+                     code {
+                        color: rgb(235, 174, 108);
+                     }
+                     .reveal pre {
+                        font-size: 0.8em;
+                     }
+                     .reveal h2, .reveal h3, .reveal h4, .reveal p {
+                        margin-top: 30px;
+                     }
+                     .reveal .slides {
+                        font-size: 1.0em;
+                     }
+                     /* TODO: pre bigger font, more marging around headings */
+                   </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div id="slides" class="slides">
+
+				<section>
+					<h1>Loading ...</h1>
+					<h3>Your presentation will appear here shortly</h3>
+					<p>
+						<small>Powered by Reveal.js</small>
+					</p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+                  function loadPresentation() {
+                     console.log("Loading markdown... " + new Date());
+                     $.get('/presentation.md', function(data, status, xhr){
+                        var html = new Showdown.converter().makeHtml(data);
+                        html = '<section>' +
+                           html.replace(new RegExp('<p>!</p>', 'g'), '</section><section>') +
+                           '</section>';
+                        $('#slides').html(html);
+                        console.log("Rendering Reveal.js... " + new Date());
+                        initializeRevealJS();
+                        console.log("Done! " + new Date())
+                     })
+                  }
+                  loadPresentation();
+
+                  function initializeRevealJS() {
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+		     });
+                  }
+		</script>
+
+	</body>
 </html>
-
-<script>
-var Present = { currentSlide: 0 };
-Present.showSlide = function(slide) {
-  Present.currentSlide = slide;
-  $('.centered').html(Present.slides[Present.currentSlide]);
-  $('.slideCount').html('Slide ' + (Present.currentSlide+1) + ' of ' + Present.slides.length);
-};
-Present.nextSlide = function() {
-  if (Present.currentSlide < Present.slides.length-1) {
-    Present.showSlide(Present.currentSlide+1);
-  }
-};
-Present.prevSlide = function() {
-  if (Present.currentSlide > 0) {
-    Present.showSlide(Present.currentSlide-1);
-  }
-};
-
-Present.reload = function() {
-    $.ajax({
-        url: 'presentation.md',
-        success: function(data) {
-            if (data.length>0) {
-                converter = new Showdown.converter();
-                var converted = converter.makeHtml(data);
-                Present.slides = converted.split('<p>!</p>');
-                Present.showSlide(Present.currentSlide);
-            }
-        }
-    });
-};
-Present.reload();
-
-$(document).keydown(function(e){
-    if (e.keyCode == 37) {
-       Present.prevSlide();
-       return false;
-    }
-    if (e.keyCode == 39) {
-      Present.nextSlide();
-      return false;
-    }
-    if (e.keyCode == 32) { // space
-        // Seems to work only in FF, not Chrome
-        Present.reload();
-        return false;
-    }
-});
-
-</script>

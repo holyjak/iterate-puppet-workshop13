@@ -350,6 +350,8 @@ From `puppet/modules/my_webapp/files/etc/apache2` into `/etc/apache2/`:
 Apache doesn't only require its configuration, it should also be
 restarted ("reloaded") whenever it changes.
 
+!
+
 #### Task 5.1: Tell Puppet to restart Apache when its configuration changes. <!-- Done when 5 min left -->
 
 You'll need to apply the
@@ -378,12 +380,18 @@ provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Servic
 
 #### Task 6.1: Use the [puppetlabs apache module] instead of doing everything manually
 
+##### (1) Get the module
+
 Run `vagrant ssh` and then:
 
     puppet --configprint modulepath # optional
     mkdir -p /home/vagrant/.puppet/modules
     puppet module install puppetlabs-apache
     mv /home/vagrant/.puppet/modules/* /vagrant/puppet/modules/
+
+!
+
+##### (2) Use the module
 
 Use the apache module: include the main class (`apache`) and use the
 `apache::vhost` resource that it defines.
