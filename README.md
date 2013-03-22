@@ -31,13 +31,18 @@ Vim with
 other
 [puppet-friendly editor](http://projects.puppetlabs.com/projects/1/wiki/Editor_Tips)
 or at least one with Ruby syntax highlighting.
-9. Open the following pages in your browser:
+
+Right before the workshop:
+
+1. Open the following pages in your browser:
    * Puppet Type Reference:
    [http://docs.puppetlabs.com/references/2.7.latest/type.html](http://docs.puppetlabs.com/references/2.7.latest/type.html)
    * Defining a Class:
    [http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
    * Relationship metaparameters:
-   [http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+[http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+   * The Apache module documentation: [https://forge.puppetlabs.com/puppetlabs/apache](https://forge.puppetlabs.com/puppetlabs/apache)
+2. Make sure you have network access!
 
 Note: The precise64 box comes pre-installed with VirtualBox guest additions
 4.2.0 => either use VB 4.2.0 or the vagrant-vbguest plugin to
@@ -48,6 +53,10 @@ Note: The latest version of Puppet is 3.1 but we will be using 2.7.x
 since that is what comes pre-installed with Vagrant. For our purpose,
 [the differences](http://docs.puppetlabs.com/puppet/3/reference/release_notes.html)
 aren't that important.
+
+Warning for Windows users - there are unfortunately some challenges:
+* `vagrant ssh` doesn't work; check [Vagrant documentation](http://docs-v1.vagrantup.com/v1/docs/getting-started/ssh.html) for help
+* `puppet-lint` might complain about carriage-returns added automatically by `git clone`
 
 Content draft
 -------------
@@ -116,38 +125,38 @@ Resources
 Links
 -----
 
-### Tutorials, examples etc. 
+### Tutorials, examples etc.
 1. J. Holy:
 [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
-2. 
+2.
 [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
-3. 
+3.
 [Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
 (described in the
 [README](https://github.com/iterate/codecamp2012/blob/puppet/README.md).)
-4. 
+4.
 [Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php)
 (12/2012) - blueprint/base for creating good, readable modules
-5. 
+5.
 [Example42 Puppet Tutorials](http://www.example42.com/?q=Example42PuppetTutorials):
 [Puppet Essentials](http://example42.com/tutorials/build/deck/essentials/),
 [Puppet Advanced Topics](http://example42.com/tutorials/build/deck/advanced/)
 6. PuppetLabs: [Learning Puppet](http://docs.puppetlabs.com/learning/)
 7. [Puppet Cookbook](http://www.puppetcookbook.com/) (online)
-8. 
+8.
 [Verifying Puppet: Checking Syntax and Writing Automated Tests](https://puppetlabs.com/blog/verifying-puppet-checking-syntax-and-writing-automated-tests/)
 (Jan 2012)
 
 ### Puppet Docs (v2.7)
 1.  [Puppet Type Reference](http://docs.puppetlabs.com/references/2.7.latest/type.html)
 2.  [Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
-3. 
+3.
 [Relationship metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
 (subscribe etc.)
-4. 
+4.
  [Module Fundamentals](http://docs.puppetlabs.com/puppet/2.7/reference/modules_fundamentals.html)
 - module layout, auto-loading of modules etc.
-5. 
+5.
 [Puppet Style Guide](http://docs.puppetlabs.com/guides/style_guide.html)
 - indent with two spaces, use single quotes wherever possible, ensure
 always first, avoid inheritance

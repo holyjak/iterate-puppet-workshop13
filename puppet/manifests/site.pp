@@ -9,4 +9,9 @@ include puppet_lint
 
 ## TODO Add your resources etc. here
 
-package { 'nano': ensure => latest }
+package { 'nano': ensure => installed }
+
+exec { 'run_presentation':
+  command => '/usr/bin/python -m SimpleHTTPServer 8080 &',
+  cwd => '/vagrant/presentation',
+}

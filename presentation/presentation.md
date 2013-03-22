@@ -6,15 +6,20 @@ Iterate Puppet Miniworkshop 2/2013
 -->
 Let's get going!
 
+Make sure your Vagrant VM has network access!
+
 Tip:
 
     cd presentation
     python -m SimpleHTTPServer
     browse to http://localhost:8000
 
+(Or access <code>http://localhost:65432</code>)
 <!--
 # TIMING #
-60 min to go; done at min.:
+Note: 60 min is possible but quite rushed. 2h best for peopel w/o prior Puppet experience,
+go slower through the tasks. More participants => get a side-kick.
+
 - Intro: 	57
 
 - Topic 1:	53	(packages)
@@ -49,7 +54,7 @@ Intro <!-- Done when 57 min left -->
 
 1. (0.5m) Intro: What, why, and how are we going to learn
    * Learning based on your questions => ask!
-   * Why Vagrant, V. x normal puppet agent
+   * What is Vagrant, what does it do for us? (VM, ssh)
 2. (3m) What is Puppet?
     * provisioner (=?) => many nodes
     * p. vs. shell scripts (cross-platform, modules, master-slave,
@@ -93,13 +98,13 @@ Advanced stuff:
 
 ### Look around
 
-Run `find .` in the workshop directory to see what we have got here.
+Run `find puppet` in the workshop directory to see what we have got here.
 
 !
 
 ### Applying puppet config
 
-To apply the Puppet configuration after each task:
+To apply the Puppet configuration *after each task*:
 
 Run either
 
@@ -111,6 +116,8 @@ or
     cd /vagrant/puppet
     sudo puppet apply --debug --verbose --modulepath=modules manifests/site.pp
 
+Observe the *logs* printed into the console.
+
 !
 
 ### Topic 1. Installing packages <!-- Done when 53 min left -->
@@ -118,7 +125,7 @@ or
 A simple example of a resource declaration:
 
     package { 'vim':
-      ensure => latest,
+      ensure => installed,
     }
 
 What is this?
@@ -163,19 +170,25 @@ Time: 45s catalog run
 
 Either:
 
-    package { 'vim': ensure => latest, }
-    package { 'apache2': ensure => latest, }
+    package { 'vim': ensure => installed, }
+    package { 'apache2': ensure => installed, }
 
 Or:
 
-    package { ['vim', 'apache2']: ensure => latest, }
+    package { ['vim', 'apache2']: ensure => installed, }
 
 !
 
 #### Intermezzo: Syntax checking
 
+From the host machine:
+
     vagrant ssh -c 'puppet-lint --with-filename \\
         /vagrant/puppet/'
+
+From the VM:
+
+    puppet-lint --with-filename /vagrant/puppet/
 
 !
 
@@ -246,7 +259,7 @@ Class example:
     class my_webapp {                       # declare
       ... # install packages etc.
     }
-    
+
     class { 'my_webapp': }                  # apply
     # In this case, this would also suffice:
     # include my_webapp
@@ -277,7 +290,7 @@ The class has already been defined for you in
 puppet/modules/my_webapp/manifests/init.pp:
 
     class my_webapp {
-      package { ['vim', 'apache2']: ensure => latest, }
+      package { ['vim', 'apache2']: ensure => installed, }
       service { 'apache2': ensure => running,
         require => Package['apache2'], }
     }
@@ -336,7 +349,7 @@ init.pp:
       file { ['/srv/my', '/srv/my/www']:
         ensure => directory,
       }
-        
+
       file { '/srv/my/www/my_web':
         ensure => directory,
         source => 'puppet:///modules/my_webapp/www',
@@ -434,17 +447,17 @@ For vagrant, move the modules to /vagrant/puppet/modules/
 
 #### Task 6.1 solution
 
-    package { ['vim']: ensure => latest, } # no apache
-  
+    package { ['vim']: ensure => installed, } # no apache
+
     class { 'apache': }
-  
+
     apache::vhost { 'localhost':
       #priority        => '25',
       #vhost_name      => '*',
       port            => '80',
       docroot => '/srv/my/www',
     }
-  
+
     file { ... }
 
 (No apache2 package or service anymore.)
@@ -466,7 +479,7 @@ A parametrized class:
       $param_with_default = 'default value') {
       ... using the $required_param somewhere here ...
     }
-    
+
     class { 'my_webapp': $required_param => 123, }
 -->
 !
