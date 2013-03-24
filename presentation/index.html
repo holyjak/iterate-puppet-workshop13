@@ -4,7 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Puppet Workshop '13 @ reveal.js</title>
+		<title>Puppet Workshop '13 @ Reveal.js</title>
+
+		<meta name="author" content="Jakub Holy">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -14,6 +16,8 @@
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
+                <link rel="stylesheet" href="css/jholy.css">
+
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -22,36 +26,9 @@
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		</script>
 
-                <!-- JH: -->
-                <script src="lib/js/zepto.min.js"></script>
-                <script src="plugin/markdown/showdown.js"></script>
-
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
-
-                   <style type="text/css">
-                     .reveal .slides {
-                        text-align: left; //center
-                     }
-
-                     .reveal ol, .reveal ul {
-                        display: block; //inline-block;
-                     }
-                     code {
-                        color: rgb(235, 174, 108);
-                     }
-                     .reveal pre {
-                        font-size: 0.8em;
-                     }
-                     .reveal h2, .reveal h3, .reveal h4, .reveal p {
-                        margin-top: 30px;
-                     }
-                     .reveal .slides {
-                        font-size: 1.0em;
-                     }
-                     /* TODO: pre bigger font, more marging around headings */
-                   </style>
 	</head>
 
 	<body>
@@ -59,15 +36,12 @@
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
-			<div id="slides" class="slides">
+			<div class="slides">
 
-				<section>
-					<h1>Loading ...</h1>
-					<h3>Your presentation will appear here shortly</h3>
-					<p>
-						<small>Powered by Reveal.js</small>
-					</p>
-				</section>
+			  <section data-markdown="/presentation.md">
+                            Loading from Markdown ...
+                          </section>
+
 			</div>
 
 		</div>
@@ -77,22 +51,6 @@
 
 		<script>
 
-                  function loadPresentation() {
-                     console.log("Loading markdown... " + new Date());
-                     $.get('/presentation.md', function(data, status, xhr){
-                        var html = new Showdown.converter().makeHtml(data);
-                        html = '<section>' +
-                           html.replace(new RegExp('<p>!</p>', 'g'), '</section><section>') +
-                           '</section>';
-                        $('#slides').html(html);
-                        console.log("Rendering Reveal.js... " + new Date());
-                        initializeRevealJS();
-                        console.log("Done! " + new Date())
-                     })
-                  }
-                  loadPresentation();
-
-                  function initializeRevealJS() {
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
@@ -112,10 +70,11 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
 					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
-		     });
-                  }
+			});
+
 		</script>
 
 	</body>

@@ -47,7 +47,7 @@ go slower through the tasks. More participants => get a side-kick.
 
 -->
 
-!
+---
 
 Intro <!-- Done when 57 min left -->
 =====
@@ -76,7 +76,7 @@ Vagrant x Puppet:
 /tmp/vagrant-puppet$ sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
 -->
 
-!
+---
 
 Tasks
 =====
@@ -94,13 +94,13 @@ Advanced stuff:
 
 * modules
 
-!
+---
 
 ### Look around
 
 Run `find puppet` in the workshop directory to see what we have got here.
 
-!
+---
 
 ### Applying puppet config
 
@@ -118,7 +118,7 @@ or
 
 Observe the *logs* printed into the console.
 
-!
+---
 
 ### Topic 1. Installing packages <!-- Done when 53 min left -->
 
@@ -144,7 +144,7 @@ This is a basic building block of Puppet code. Notes:
 -->
 Noticed anything strange? (`,`)
 
-!
+---
 
 #### Task 1.1 <!-- Done when 49 min left -->
 
@@ -164,7 +164,7 @@ TODO: vagrant provision vs. running puppet agent manually
 Time: 45s catalog run
 -->
 
-!
+---
 
 #### Task 1.1 solution
 
@@ -177,7 +177,7 @@ Or:
 
     package { ['vim', 'apache2']: ensure => installed, }
 
-!
+---
 
 #### Intermezzo: Syntax checking
 
@@ -190,7 +190,7 @@ From the VM:
 
     puppet-lint --with-filename /vagrant/puppet/
 
-!
+---
 
 ### Topic 2. Running services and handling dependencies
 
@@ -207,7 +207,7 @@ Testing:
 that it gets started
 * Notice log *../Service[apache2]/.. to running*
 
-!
+---
 
 #### Task 2.1 solution
 
@@ -215,7 +215,7 @@ site.pp:
 
     service { 'apache2': ensure => running, }
 
-!
+---
 
 #### Intermezzo
 
@@ -230,7 +230,7 @@ of action execution => express dependencies explicitely:
 Note: Refer to resources via `ResourceType['name']` (notice
 the initial capital letter).
 
-!
+---
 
 #### Task 2.2 solution
 
@@ -247,7 +247,7 @@ or
       # ^ could require multiple resources
     }
 
-!
+---
 
 ### Topic 3. Using classes for structure and reuse <!-- Done when 36 min left -->
 
@@ -270,7 +270,7 @@ Here we (1) define and (2) apply a class
 Optional: see
 [Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
 
-!
+---
 
 #### Task 3.1: Wrap the resources defined so far in a class
 
@@ -283,7 +283,7 @@ The class has already been defined for you in
 1. move the resources into it
 2. apply the class in the original `site.pp`
 
-!
+---
 
 #### Task 3.1 solution
 
@@ -299,7 +299,7 @@ puppet/manifests/site.pp:
 
     class { 'my_webapp': }
 
-!
+---
 
 ### Topic 4. Copying files and directories
 
@@ -317,7 +317,7 @@ They will try to copy the dir w/o creating the parent dirs and fail -
 that is a good learning.
 -->
 
-!
+---
 
 #### Side note: File path <=> puppet url
 
@@ -332,13 +332,13 @@ that is a good learning.
 
     (Vagrantfile: puppet.module_path = "puppet/modules")
 
-!
+---
 
 #### Intermezzo:
 
 How can I be sure the files are created after their directories without any `require`? Autorequire!
 
-!
+---
 
 #### Task 4.1 solution
 
@@ -359,7 +359,7 @@ init.pp:
     }
 
 
-!
+---
 
 #### Task 4.2: Copy also the Apache site config
 
@@ -372,14 +372,14 @@ From `puppet/modules/my_webapp/files/etc/apache2` into `/etc/apache2/`:
     }
 
 
-!
+---
 
 #### Topic 5. Dependencies II: reload after configuration change <!-- Done when 10 min left -->
 
 Apache doesn't only require its configuration, it should also be
 restarted ("reloaded") whenever it changes.
 
-!
+---
 
 #### Task 5.1: Tell Puppet to restart Apache when its configuration changes. <!-- Done when 5 min left -->
 
@@ -391,7 +391,7 @@ Tip: To simulate change, run `echo '#' >>
 puppet/modules/my_webapp/files/etc/apache2/envvars` prior to `vagrant
 provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Service[apache2]*".
 
-!
+---
 
 #### Task 5.1 solution
 
@@ -403,7 +403,7 @@ provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Servic
 
 (There are other/better ways, e.g. subscribe to a special config class.)
 
-!
+---
 
 ### Topic 6. The final round: modules
 
@@ -418,7 +418,7 @@ Run `vagrant ssh` and then:
     puppet module install puppetlabs-apache
     mv /home/vagrant/.puppet/modules/* /vagrant/puppet/modules/
 
-!
+---
 
 ##### (2) Use the module
 
@@ -443,7 +443,8 @@ puppet module install puppetlabs-apache
 
 For vagrant, move the modules to /vagrant/puppet/modules/
 -->
-!
+
+---
 
 #### Task 6.1 solution
 
@@ -482,7 +483,8 @@ A parametrized class:
 
     class { 'my_webapp': $required_param => 123, }
 -->
-!
+
+---
 
 Left out
 --------
@@ -494,14 +496,14 @@ Left out
 - facts
 - ...
 
-!
+---
 
 Congratulations, we are done!
 ----------------------------
 
 What have we learned?
 
-!
+---
 
 Next learning steps
 -------------------
@@ -514,7 +516,7 @@ Read primarily
 
 Links to these and other valuable resources are [in the main README](https://github.com/jakubholynet/iterate-puppet-workshop13#links).
 
-!
+---
 
 Feed-me-back! Q&A
 =============

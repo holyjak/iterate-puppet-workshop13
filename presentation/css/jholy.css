@@ -1,0 +1,25 @@
+/*
+ * J. Holy - My own Reveal CSS modification
+ *
+ * Consider also 'center: false,' in Reveal.initialize.
+ */
+
+.reveal .slides {
+    text-align: left; //center
+}
+
+.reveal ol, .reveal ul {
+    display: block; //inline-block;
+}
+code {
+    color: rgb(235, 174, 108);
+}
+.reveal pre {
+    font-size: 0.8em;
+}
+.reveal h2, .reveal h3, .reveal h4, .reveal p {
+    margin-top: 30px;
+}
+.reveal .slides {
+    font-size: 1.0em;
+}
