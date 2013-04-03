@@ -126,39 +126,30 @@ Links
 -----
 
 ### Tutorials, examples etc.
-1. J. Holy:
-[Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
-2.
-[Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
-3.
-[Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
+1. J. Holy: [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
+2. [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
+3. [Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
 (described in the
 [README](https://github.com/iterate/codecamp2012/blob/puppet/README.md).)
-4.
-[Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php)
+4. [Simple Puppet Module Structure Redux](http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php)
 (12/2012) - blueprint/base for creating good, readable modules
-5.
-[Example42 Puppet Tutorials](http://www.example42.com/?q=Example42PuppetTutorials):
+5. [Example42 Puppet Tutorials](http://www.example42.com/?q=Example42PuppetTutorials):
 [Puppet Essentials](http://example42.com/tutorials/build/deck/essentials/),
 [Puppet Advanced Topics](http://example42.com/tutorials/build/deck/advanced/)
 6. PuppetLabs: [Learning Puppet](http://docs.puppetlabs.com/learning/)
 7. [Puppet Cookbook](http://www.puppetcookbook.com/) (online)
-8.
-[Verifying Puppet: Checking Syntax and Writing Automated Tests](https://puppetlabs.com/blog/verifying-puppet-checking-syntax-and-writing-automated-tests/)
+8. [Verifying Puppet: Checking Syntax and Writing Automated Tests](https://puppetlabs.com/blog/verifying-puppet-checking-syntax-and-writing-automated-tests/)
 (Jan 2012)
 
 ### Puppet Docs (v2.7)
-1.  [Puppet Type Reference](http://docs.puppetlabs.com/references/2.7.latest/type.html)
-2.  [Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
-3.
-[Relationship metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
+1. [Puppet Type Reference](http://docs.puppetlabs.com/references/2.7.latest/type.html)
+2. [Defining a Class](http://docs.puppetlabs.com/puppet/2.7/reference/lang_classes.html#defining-a-class)
+3. [Relationship metaparameters](http://docs.puppetlabs.com/puppet/2.7/reference/lang_relationships.html#relationship-metaparameters)
 (subscribe etc.)
-4.
- [Module Fundamentals](http://docs.puppetlabs.com/puppet/2.7/reference/modules_fundamentals.html)
-- module layout, auto-loading of modules etc.
-5.
-[Puppet Style Guide](http://docs.puppetlabs.com/guides/style_guide.html)
-- indent with two spaces, use single quotes wherever possible, ensure
+4. [Module Fundamentals](http://docs.puppetlabs.com/puppet/2.7/reference/modules_fundamentals.html)
+    - module layout, auto-loading of modules etc.
+5. [Puppet Style Guide](http://docs.puppetlabs.com/guides/style_guide.html)
+    - indent with two spaces, use single quotes wherever possible, ensure
 always first, avoid inheritance
 
 ### Tools
