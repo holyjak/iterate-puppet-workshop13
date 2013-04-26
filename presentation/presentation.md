@@ -14,7 +14,7 @@ Tip:
     python -m SimpleHTTPServer
     browse to http://localhost:8000
 
-(Or access <code>http://localhost:65432</code>)
+(Or access <code>http://localhost:65432</code> (served by Vagrant))
 <!--
 # TIMING #
 Note: 60 min is possible but quite rushed. 2h best for peopel w/o prior Puppet experience,

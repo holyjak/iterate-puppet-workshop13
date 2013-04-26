@@ -2,12 +2,30 @@ Iterate Puppet Miniworkshop 2/2013
 ==================================
 
 Goal
-----
+-----
 
 Teach usable basics of Puppet to people without any previous
 experience. Practical, hands-on.
 
-Hold on Iterate Conference winter edition 2013.
+About
+-----
+Creating some users, installing a database and an Apache server, configuring and starting it, deploying a website onto it sounds is an easy job. But after few years in production, with countless upgrades and small changes, you have no more any idea what stuff and version you are running and how it was set up. Now what if you suddenly need 20 of these servers?
+What if you could somehow describe what you want to have installed/configured/running, keep that description under version control, and be able to apply it to any number of new machines? That is exactly what Puppet, the configuration management and automation tool, does.
+
+Come to learn how to use this magical tool to configure servers in a documented, reusable, shareable way. We will also play with Vagrant, a tool for making "portable development environments".
+
+### What will I learn?
+At the end you will know what Puppet is, how to do the most common operations (from package installation to Apache running a website), and what else it can do and how to learn more plus you will get a hands-on experience with Vagrant.
+
+### What do I need to know/have?
+Some experience with Linux and the command line is perhaps the only
+knowledge requirement, some knowledge of Ruby is a plus.
+
+Aside of that, you will need to follow the 8 preparation steps described
+below well ahead of the workshop.
+
+It is possible to use Windows machines but they are likely to face some
+challenges; Linux or OS X is recommended.
 
 Required participant preparation prior to the workshop
 ------------------------------------------------------
@@ -20,6 +38,7 @@ might take over an hour so do it early.
 3. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
 4. (Optional - `vagrant up` shall do it) Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
 5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
+ (or just download and unpack the [zip archive of this](https://github.com/jakubholynet/iterate-puppet-workshop13/archive/master.zip))
 6. Enter the repository (`cd iterate-puppet-workshop13`) and
 initialize Vagrant: `vagrant up`
 7. Re-load vagrant to be sure everything is really up to date: `vagrant
@@ -58,25 +77,14 @@ Warning for Windows users - there are unfortunately some challenges:
 * `vagrant ssh` doesn't work; check [Vagrant documentation](http://docs-v1.vagrantup.com/v1/docs/getting-started/ssh.html) for help
 * `puppet-lint` might complain about carriage-returns added automatically by `git clone`
 
-Content draft
--------------
 
-Based on practical experiences from Comoyo.
-
-* Including: Installing packages, copying files, running services,
-declaring dependencies & notifications, creating users, templates,
-exec, arrays, ...
-.
-* To consider: defaults, declaring custom resources, pitfalls, ...
-* Best practices: Structuring, lint, coding guidelines.
-
-Plan (1h)
+Plan (1-2h)
 ---------
 
 1. (0.5m) Intro: What, why, and how are we going to learn
 2. (3m) What is Puppet?
     * what need does it satisfy, few words about how it works
-3. (50m) Workshop
+3. (50-110m) Workshop & discussion
 4. (5m) Summary, feedback, questions
 
 Why Vagrant?
@@ -90,19 +98,6 @@ Start the VM with `vagrant up`, apply the puppet manifest with
 re-create the VM to get clean state: `vagrant destroy; vagrant up;
 vagrant reload`. Notice also that this directory is shared with the VM
 as `/vagrant/`.
-
-### Running Puppet manually
-
-Vagrant basically copies the puppet config files to a place in the VM
-and then invokes puppet. Notice the vagrant log line "*[default]
-Running Puppet with /tmp/vagrant-puppet/ ...*".
-
-You can do it manually as well:
-
-    vagrant ssh
-    cd /tmp/vagrant-puppet/
-    # opt.: cp -r /vagrant/puppet/manifests ./manifests; modules too
-    sudo puppet apply --debug --verbose --modulepath=modules-0 manifests/site.pp
 
 Tasks
 -----
