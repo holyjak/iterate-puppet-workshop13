@@ -8,13 +8,7 @@ Let's get going!
 
 Make sure your Vagrant VM has network access!
 
-Tip:
-
-    cd presentation
-    python -m SimpleHTTPServer
-    browse to http://localhost:8000
-
-(Or access <code>http://localhost:65432</code> (served by Vagrant))
+Tip: Browse to <code>http://localhost:65432</code> to see this presentation (served by Vagrant)
 <!--
 # TIMING #
 Note: 60 min is possible but quite rushed. 2h best for peopel w/o prior Puppet experience,

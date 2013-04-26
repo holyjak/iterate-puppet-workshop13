@@ -33,18 +33,18 @@ Required participant preparation prior to the workshop
 Notice: Downloading and installing the software and virtual box image
 might take over an hour so do it early.
 
-1. Install VirtualBox, e.g. 4.2.0: http://download.virtualbox.org/virtualbox/4.2.0/
-2. Install Vagrant: http://downloads.vagrantup.com/tags/v1.0.6
-3. Install `$ vagrant gem install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
-4. (Optional - `vagrant up` shall do it) Download a base box: `vagrant box add precise http://files.vagrantup.com/precise64.box`
-5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
+
+1. Install VirtualBox, e.g. 4.2.12: http://download.virtualbox.org/virtualbox/4.2.12/
+2. Install Vagrant: http://downloads.vagrantup.com/tags/v1.2.2
+3. Install `$ vagrant plugin install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
+4. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
  (or just download and unpack the [zip archive of this](https://github.com/jakubholynet/iterate-puppet-workshop13/archive/master.zip))
-6. Enter the repository (`cd iterate-puppet-workshop13`) and
+5. Enter the repository (`cd iterate-puppet-workshop13`) and
 initialize Vagrant: `vagrant up`
-7. Re-load vagrant to be sure everything is really up to date: `vagrant
+6. Re-load vagrant to be sure everything is really up to date: `vagrant
 reload`
-8. Get an editor with Puppet support - Emacs with the
-[puppet mode](https://github.com/puppetlabs/puppet-syntax-emacs/blob/master/puppet-mode.el),
+7. Get an editor with Puppet support - Emacs with the
+[Puppet mode](https://github.com/puppetlabs/puppet-syntax-emacs/blob/master/puppet-mode.el),
 Vim with
 [puppet.vim](http://downloads.puppetlabs.com/puppet/puppet.vim) or any
 other
@@ -63,9 +63,10 @@ Right before the workshop:
    * The Apache module documentation: [https://forge.puppetlabs.com/puppetlabs/apache](https://forge.puppetlabs.com/puppetlabs/apache)
 2. Make sure you have network access!
 
-Note: The precise64 box comes pre-installed with VirtualBox guest additions
+Note: The precise32 box comes pre-installed with VirtualBox guest additions
 4.2.0 => either use VB 4.2.0 or the vagrant-vbguest plugin to
-automatically upgrade them (requires `vagrant reload` after `up` to
+automatically upgrade them to make sure that Vagrant will be able to communicate with the VM
+without any problems (requires `vagrant reload` after `up` to
 reload the updated kernel).
 
 Note: The latest version of Puppet is 3.1 but we will be using 2.7.x
