@@ -9,6 +9,7 @@ warning("Setting up ${fqdn} ...")
 include puppet_lint
 
 ## TODO Add your resources etc. here
+class { 'my_webapp': }
 
 package { 'nano': ensure => installed }
 
