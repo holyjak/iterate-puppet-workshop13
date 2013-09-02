@@ -34,16 +34,17 @@ Notice: Downloading and installing the software and virtual box image
 might take over an hour so do it early.
 
 
-1. Install VirtualBox, e.g. 4.2.12: http://download.virtualbox.org/virtualbox/4.2.12/
-2. Install Vagrant: http://downloads.vagrantup.com/tags/v1.2.2
+1. Install VirtualBox, e.g. 4.2.16: http://download.virtualbox.org/virtualbox/4.2.16/
+2. Install Vagrant: http://downloads.vagrantup.com/tags/v1.2.7
 3. Install `$ vagrant plugin install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
-4. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
+4. (Optional, recommended) Install `$ vagrant plugin install vagrant-cachier` - to enable offline work 
+5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
  (or just download and unpack the [zip archive of this](https://github.com/jakubholynet/iterate-puppet-workshop13/archive/master.zip))
-5. Enter the repository (`cd iterate-puppet-workshop13`) and
+6. Enter the repository (`cd iterate-puppet-workshop13`) and
 initialize Vagrant: `vagrant up`
-6. Re-load vagrant to be sure everything is really up to date: `vagrant
+7. Re-load vagrant to be sure everything is really up to date: `vagrant
 reload`
-7. Get an editor with Puppet support - Emacs with the
+8. Get an editor with Puppet support - Emacs with the
 [Puppet mode](https://github.com/puppetlabs/puppet-syntax-emacs/blob/master/puppet-mode.el),
 Vim with
 [puppet.vim](http://downloads.puppetlabs.com/puppet/puppet.vim) or any
