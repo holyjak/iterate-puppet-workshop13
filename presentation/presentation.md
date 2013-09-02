@@ -425,19 +425,6 @@ Use the apache module: include the main class (`apache`) and use the
 
 [puppetlabs apache module]: https://forge.puppetlabs.com/puppetlabs/apache
 
-<!--
-TODO
-- normally modules would be installed via puppet module
-
-Ex:
-vagrant ssh
-puppet --configprint modulepath
-mkdir -p /home/vagrant/.puppet/modules
-puppet module install puppetlabs-apache
-
-For vagrant, move the modules to /vagrant/puppet/modules/
--->
-
 ---
 
 #### Task 6.1 solution

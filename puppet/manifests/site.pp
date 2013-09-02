@@ -13,5 +13,5 @@ package { 'nano': ensure => installed }
 
 exec { 'run_presentation':
   command => '/usr/bin/python -m SimpleHTTPServer 8080 &',
-  cwd => '/vagrant/presentation',
+  cwd     => '/vagrant/presentation',
 }
