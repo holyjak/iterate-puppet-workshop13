@@ -1,4 +1,4 @@
-Iterate Puppet Miniworkshop 2/2013
+Iterate Puppet Miniworkshop 9/2013
 ==================================
 
 <!--
@@ -43,7 +43,15 @@ go slower through the tasks. More participants => get a side-kick.
 
 ---
 
-Intro <!-- Done when 57 min left -->
+Who are we?
+===========
+
+* Jakub Holy, Iterate, 1.5 years with Puppet at AWS
+* Kenneth Rørvik, Redpill Linpro, Puppet expert :)
+
+---
+
+Intro! <!-- Done when 57 min left -->
 =====
 
 1. (0.5m) Intro: What, why, and how are we going to learn

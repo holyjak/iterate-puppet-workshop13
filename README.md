@@ -44,13 +44,15 @@ might take over an hour so do it early.
 initialize Vagrant: `vagrant up`
 7. Re-load vagrant to be sure everything is really up to date: `vagrant
 reload`
-8. Get an editor with Puppet support - Emacs with the
+8. Get an editor with Puppet support - [Geppetto][1] (Eclipse-based IDE), Emacs with the
 [Puppet mode](https://github.com/puppetlabs/puppet-syntax-emacs/blob/master/puppet-mode.el),
 Vim with
 [puppet.vim](http://downloads.puppetlabs.com/puppet/puppet.vim) or any
 other
 [puppet-friendly editor](http://projects.puppetlabs.com/projects/1/wiki/Editor_Tips)
 or at least one with Ruby syntax highlighting.
+
+[1]: http://cloudsmith.github.io/geppetto/
 
 Right before the workshop:
 
@@ -123,6 +125,7 @@ Links
 -----
 
 ### Tutorials, examples etc.
+
 1. J. Holy: [Minimalistic Practical Introduction to Puppet (Not Only) For Vagrant Users][PuppetIntro]
 2. [Puppet Troubleshooting: Compiling Catalog, Locating a Cached Catalog](http://theholyjava.wordpress.com/2012/10/17/puppet-where-to-find-the-cached-catalog-on-client/)
 3. [Example: User and password-less ssh setup](https://github.com/iterate/codecamp2012/blob/puppet/manifests/my-user.pp)
