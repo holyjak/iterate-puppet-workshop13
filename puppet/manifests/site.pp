@@ -1,4 +1,5 @@
 ## The main manifest
+import 'apt_setup.pp'
 
 ## DO NOT CHANGE THIS STUFF
 # The functions debug, info, notice, warning may be used
@@ -15,3 +16,8 @@ exec { 'run_presentation':
   command => '/usr/bin/python -m SimpleHTTPServer 8080 &',
   cwd     => '/vagrant/presentation',
 }
+
+# Magic to use locally cached .debs, ignore :)
+stage { 'pre': }
+Stage['pre'] -> Stage['main']
+class { 'apt_setup': stage => 'pre', }

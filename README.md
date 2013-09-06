@@ -37,7 +37,7 @@ might take over an hour so do it early.
 1. Install VirtualBox, e.g. 4.2.16: http://download.virtualbox.org/virtualbox/4.2.16/
 2. Install Vagrant: http://downloads.vagrantup.com/tags/v1.2.7
 3. Install `$ vagrant plugin install vagrant-vbguest` ([Why?](http://theholyjava.wordpress.com/wiki/tools/vagrant-notes/#tip_install_vagrant-vbguest))
-4. (Optional, recommended) Install `$ vagrant plugin install vagrant-cachier` - to enable offline work 
+4. (Optional, recommended) Install `$ vagrant plugin install vagrant-cachier` - to enable offline work
 5. Check out this repository: `git clone git://github.com/jakubholynet/iterate-puppet-workshop13.git`
  (or just download and unpack the [zip archive of this](https://github.com/jakubholynet/iterate-puppet-workshop13/archive/master.zip))
 6. Enter the repository (`cd iterate-puppet-workshop13`) and
@@ -51,8 +51,11 @@ Vim with
 other
 [puppet-friendly editor](http://projects.puppetlabs.com/projects/1/wiki/Editor_Tips)
 or at least one with Ruby syntax highlighting.
+9. (Optional, recommended) Get the necessary things so that you can work offline - download [puppetworkshop-offline.zip][2]
+   and unpack it in this directory (so that you will get `./offline/apt-archives/` etc.)
 
 [1]: http://cloudsmith.github.io/geppetto/
+[2]: https://dl.dropboxusercontent.com/u/3216097/tmp/puppetworkshop-offline.zip
 
 Right before the workshop:
 
