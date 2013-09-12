@@ -133,7 +133,7 @@ A simple example of a resource declaration:
 What is this?
 
     <resource_type> { <resource_name>:
-      ensure => present,
+      ensure     => present,
       attribute2 => value2,
     }
 
@@ -237,14 +237,14 @@ the initial capital letter).
 #### Task 2.2 solution
 
     service { 'apache2':
-      ensure => running,
+      ensure  => running,
       require => Package['apache2'],
     }
 
 or
 
     service { 'apache2':
-      ensure => running,
+      ensure  => running,
       require => [ Package['apache2'] ],
       # ^ could require multiple resources
     }
@@ -353,10 +353,10 @@ init.pp:
       }
 
       file { '/srv/my/www/my_web':
-        ensure => directory,
-        source => 'puppet:///modules/my_webapp/www',
+        ensure  => directory,
+        source  => 'puppet:///modules/my_webapp/www',
         recurse => true,
-        owner => 'www-data',
+        owner   => 'www-data',
       }
     }
 
@@ -368,8 +368,8 @@ init.pp:
 From `puppet/modules/my_webapp/files/etc/apache2` into `/etc/apache2/`:
 
     file { '/etc/apache2':
-      ensure => directory,
-      source => 'puppet:///modules/my_webapp/etc/apache2',
+      ensure  => directory,
+      source  => 'puppet:///modules/my_webapp/etc/apache2',
       recurse => true,
     }
 
@@ -398,8 +398,8 @@ provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Servic
 #### Task 5.1 solution
 
       service { 'apache2':
-        ensure => running,
-        require => Package['apache2'],
+        ensure    => running,
+        require   => Package['apache2'],
         subscribe => File['/etc/apache2'],
       }
 
@@ -442,10 +442,10 @@ Use the apache module: include the main class (`apache`) and use the
     class { 'apache': }
 
     apache::vhost { 'localhost':
-      #priority        => '25',
-      #vhost_name      => '*',
-      port            => '80',
-      docroot => '/srv/my/www',
+      #priority   => '25',
+      #vhost_name => '*',
+      port        => '80',
+      docroot     => '/srv/my/www',
     }
 
     file { ... }
