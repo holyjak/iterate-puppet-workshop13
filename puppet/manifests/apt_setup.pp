@@ -8,7 +8,7 @@ class apt_setup {
   file {['/vagrant/offline', $local_repo]:
     ensure => directory,
   }
-  file { "$local_repo/Packages":
+  file { "${local_repo}/Packages":
     ensure => file,
   }
 
@@ -24,8 +24,8 @@ class apt_setup {
   # cd /vagrant/apt-archives && dpkg-scanpackages .  > Packages
   file { '/etc/apt/sources.list.d/local-repo2speedup-reinstall.list':
     ensure  => file,
-    content => "deb file:$local_repo /",
-    require => File["$local_repo/Packages"],
+    content => "deb file:${local_repo} /",
+    require => File["${local_repo}/Packages"],
     notify  => Exec['apt-update'],
   }
 
