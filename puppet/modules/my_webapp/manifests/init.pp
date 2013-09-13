@@ -17,7 +17,7 @@ class my_webapp {
     #priority   => '25',
     #vhost_name => '*',
     port        => '80',
-    docroot     => '/srv/my/www',
+    docroot     => '/srv/my/www/my_web',
   }
 
   file { ['/srv/my', '/srv/my/www']:
@@ -29,7 +29,6 @@ class my_webapp {
     source  => 'puppet:///modules/my_webapp/www',
     recurse => true,
     owner   => 'www-data',
-    require => Class['apache'], # So that the user exists already
   }
 
 }
