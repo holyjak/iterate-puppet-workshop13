@@ -14,10 +14,10 @@ class my_webapp {
   class { 'apache': }
 
   apache::vhost { 'localhost':
-    #priority        => '25',
-    #vhost_name      => '*',
-    port            => '80',
-    docroot => '/srv/my/www',
+    #priority   => '25',
+    #vhost_name => '*',
+    port        => '80',
+    docroot     => '/srv/my/www',
   }
 
   file { ['/srv/my', '/srv/my/www']:
@@ -25,10 +25,11 @@ class my_webapp {
   }
 
   file { '/srv/my/www/my_web':
-    ensure => directory,
-    source => 'puppet:///modules/my_webapp/www',
+    ensure  => directory,
+    source  => 'puppet:///modules/my_webapp/www',
     recurse => true,
-    owner => 'www-data',
+    owner   => 'www-data',
+    require => Class['apache'], # So that the user exists already
   }
 
 }
