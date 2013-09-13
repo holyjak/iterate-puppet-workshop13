@@ -334,6 +334,8 @@ that is a good learning.
 
     (Vagrantfile: puppet.module_path = "puppet/modules")
 
+Beware the triple '/' in `puppet:///` !
+
 ---
 
 #### Intermezzo:
@@ -357,6 +359,7 @@ init.pp:
         source  => 'puppet:///modules/my_webapp/www',
         recurse => true,
         owner   => 'www-data',
+        require => Package['apache2'], # for the user
       }
     }
 
@@ -405,6 +408,8 @@ provision`. Watch the log for "*info: /etc/apache2: Scheduling refresh of Servic
 
 (There are other/better ways, e.g. subscribe to a special config class.)
 
+See the site at [localhost:65431](http://localhost:65431/)
+
 ---
 
 ### Topic 6. The final round: modules
@@ -448,7 +453,7 @@ Use the apache module: include the main class (`apache`) and use the
       docroot     => '/srv/my/www',
     }
 
-    file { ... }
+    file { ... } # require => Class['apache'],
 
 (No apache2 package or service anymore.)
 
