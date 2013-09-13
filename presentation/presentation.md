@@ -432,7 +432,7 @@ Run `vagrant ssh` and then:
 Use the apache module: include the main class (`apache`) and use the
 `apache::vhost` resource that it defines.
 
-* set its `docroot` to `/srv/my/www`
+* set its `docroot` to `/srv/my/www/my_web`
 * set `port` to `80`
 * use *localhost* as the resource name
 
@@ -450,7 +450,7 @@ Use the apache module: include the main class (`apache`) and use the
       #priority   => '25',
       #vhost_name => '*',
       port        => '80',
-      docroot     => '/srv/my/www',
+      docroot     => '/srv/my/www/my_web',
     }
 
     file { ... } # require => Class['apache'],
